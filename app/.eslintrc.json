@@ -3,10 +3,7 @@
     "browser": true,
     "es6": true
   },
-  "extends": [
-    "eslint:recommended",
-    "airbnb"
-  ],
+  "extends": ["eslint:recommended", "airbnb"],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
@@ -18,29 +15,26 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": [
-    "react",
-    "react-hooks"
-  ],
+  "plugins": ["react", "react-hooks"],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".jsx", ".tsx"] }],
     "import/no-unresolved": "off",
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": true, "optionalDependencies": false, "peerDependencies": false}],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true,
+        "optionalDependencies": false,
+        "peerDependencies": false
+      }
+    ],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn"
   },
   "settings": {
-    "import/extensions": [
-      ".js",
-      ".jsx",
-      ".ts",
-      ".tsx"
-    ],
+    "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
     "import/resolver": {
       "alias": {
-        "map": [
-          ["@", "./src"]
-        ],
+        "map": [["@", "./src"]],
         "extensions": [".js", ".jsx"]
       }
     }

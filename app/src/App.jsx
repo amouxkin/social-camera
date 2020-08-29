@@ -1,17 +1,15 @@
-import React, { Suspense } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from 'react-router-dom';
-import { ToastProvider } from 'react-toast-notifications';
+import React, { Suspense } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { ToastProvider } from "react-toast-notifications";
 
-import ErrorBoundary from './Error';
-import Header from './components/header';
-import GlobalStyle from './components/styles/GlobalStyle';
+import ErrorBoundary from "./Error";
+import Header from "./components/header";
+import GlobalStyle from "./components/styles/GlobalStyle";
+import { Authentication } from "./pages/authentication/authentication";
+import PrivateRoute from "./components/privateRoute/pricateRoute";
 
-const Profile = React.lazy(() => import('./pages/profile/Profile.jsx'));
-const NotFound = React.lazy(() => import('./pages/404'));
+const Profile = React.lazy(() => import("./pages/profile/Profile.jsx"));
+const NotFound = React.lazy(() => import("./pages/404"));
 
 const App = () => (
   <ErrorBoundary>
@@ -21,15 +19,13 @@ const App = () => (
         autoDismissTimeout={3000}
         placement="bottom-left"
       >
-        <GlobalStyle/>
+        <GlobalStyle />
         <Router>
           <Header />
+          <Route path={"/auth"} component={Authentication} />
           <Switch>
-            <Route exact path="/" component={Profile} />
-            <Route
-              path="*"
-              component={NotFound}
-            />
+            <PrivateRoute exact path="/" component={Profile} />
+            <Route path="*" component={NotFound} />
           </Switch>
         </Router>
       </ToastProvider>
