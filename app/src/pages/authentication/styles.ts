@@ -1,10 +1,9 @@
 import styled from "styled-components";
-import { ComponentPropsWithoutRef, ComponentPropsWithRef } from "react";
+import { ComponentPropsWithoutRef } from "react";
 
-// interface DivProps extends ComponentPropsWithoutRef<"div"> {}
-interface DivProps extends ComponentPropsWithRef<"div"> {}
+interface BaseDivProps extends ComponentPropsWithoutRef<"div"> {}
 
-export const BaseContainer = styled.div<DivProps>`
+export const BaseContainer = styled.div<BaseDivProps>`
   align-content: center;
   align-items: center;
   display: flex;
@@ -13,8 +12,7 @@ export const BaseContainer = styled.div<DivProps>`
   flex: 1;
 `;
 
-
-export const Container = styled(BaseContainer)<DivProps>`
+export const Container = styled(BaseContainer)<BaseDivProps>`
   align-content: center;
   align-items: center;
   background: rgb(68, 68, 68);
@@ -25,12 +23,12 @@ export const Container = styled(BaseContainer)<DivProps>`
   position: relative;
 `;
 
-export const AuthContainer = styled(BaseContainer as any)`
+export const AuthContainer = styled(BaseContainer)<BaseDivProps>`
   background-color: aliceblue;
   border-radius: 12px;
 `;
 
-export const AuthButtonContainer = styled(BaseContainer as any)`
+export const AuthButtonContainer = styled(BaseContainer)<BaseDivProps>`
   flex-direction: row;
   height: 32px;
   width: 100%;
@@ -39,9 +37,14 @@ export const AuthButtonContainer = styled(BaseContainer as any)`
   overflow: hidden;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
+  
+  @media (max-width: 480px) {
+ border-top-left-radius: 0px;
+  border-top-right-radius: 0px; 
+  }
 `;
 
-export const Card = styled.div`
+export const Card = styled.div<BaseDivProps>`
   align-content: center;
   background: #101010;
   border-radius: 10px;
@@ -60,17 +63,19 @@ export const Card = styled.div`
     flex-direction: column;
     max-height: 150%;
     height: auto;
-    min-height: 95%;
-    min-width: 95%;
+    min-height: 100%;
+    min-width: 100%;
+    padding: 0px;
+    border-radius: 0px;
   }
 `;
 
-export const IntroMessage = styled.h1`
+export const IntroMessage = styled.h1<ComponentPropsWithoutRef<"h1">>`
   padding: 56px 10px;
   text-align: center;
 `;
 
-export const LogoImage = styled.img`
+export const LogoImage = styled.img<ComponentPropsWithoutRef<"img">>`
   height: 180px;
   width: 158px;
 
@@ -80,15 +85,25 @@ export const LogoImage = styled.img`
   }
 `;
 
-export const AuthButton = styled.button<
-  ComponentPropsWithoutRef<"button"> & { selected: boolean }
->`
-  color: ${({ selected }) => (!selected ? "var(--gb-web-text)" : "white")};
-  background-color: ${({ selected }) =>
-    selected ? "var(--gb-red)" : "#101010"};
+interface AuthButtonProps extends ComponentPropsWithoutRef<"button"> {
+  selected: boolean;
+}
+
+export const AuthButton = styled.button<AuthButtonProps>`
+  color: var(
+    ${({ selected }) => (!selected ? "--gb-white" : "--gb-web-grey-darker")}
+  );
+  background-color: var(
+    ${({ selected }) => (selected ? "--gb-red" : "--gb-web-grey-darker")}
+  );
   border-radius: 0px;
   margin: 0px 0px;
   transition: background-color 0.5s ease;
+
+  &:hover {
+    opacity: 1;
+    background-color: var(--gb-web-red);
+  }
 `;
 
 export const AuthForm = styled.div`

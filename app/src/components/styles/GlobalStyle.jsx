@@ -12,6 +12,9 @@ const GlobalStyle = createGlobalStyle`
     --gb-white: #ffffff;
     --gb-red: #DE5145;
     --gb-green: #33AB77;
+    --gb-web-grey-darker: #101010;
+    --gb-web-red: rgb(255, 122, 84);
+    
     --gb-font-primary: 'Source Sans Pro', sans-serif;
   }
 
