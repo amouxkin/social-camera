@@ -9,7 +9,7 @@ const getPresignedUrl: RequestHandler = (request, response) => {
     response.status(200).send({url: `${pre.url}/${pre.fields.key}`});
   }
 
-  response.status(401);
+  response.status(401).send();
 };
 
 export default getPresignedUrl;

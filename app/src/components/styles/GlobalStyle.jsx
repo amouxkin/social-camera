@@ -1,6 +1,23 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+  :root {
+    --gb-web-grey: #C9C9C9;
+    --gb-web-grey-medium: #999999;
+    --gb-web-grey-dark: #636366;
+    --gb-web-light-gray: #666666;
+    --gb-web-blue: #0A84FF;
+    --gb-web-text: #C9C9C9;
+    --gb-web-background: #626266;
+    --gb-white: #ffffff;
+    --gb-red: #DE5145;
+    --gb-green: #33AB77;
+    --gb-web-grey-darker: #101010;
+    --gb-web-red: rgb(255, 122, 84);
+    
+    --gb-font-primary: 'Source Sans Pro', sans-serif;
+  }
+
   h1, p, div, span, a {
   font-family: var(--gb-font-primary);  
   }
@@ -8,20 +25,7 @@ const GlobalStyle = createGlobalStyle`
   h1, h2, h3, h4, h5, p, body, html {
     margin: 0px;
     padding: 0px;
-  }
-
-  :root {
-  --gb-web-grey: #C9C9C9;
-  --gb-web-grey-medium: #999999;
-  --gb-web-grey-dark: #636366;
-  --gb-web-light-gray: #666666;
-  --gb-web-blue: #0A84FF;
-  --gb-web-text: #C9C9C9;
-  --gb-web-background: #626266;
-  --gb-white: #ffffff;
-  --gb-red: #DE5145;
-  --gb-green: #33AB77;
-  }
+  } 
 
   * {
     box-sizing: border-box;

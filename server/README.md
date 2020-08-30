@@ -8,6 +8,8 @@ docker run -d -p 8000:9000 \
   -e "MINIO_SECRET_KEY=secretkey" \
   minio/minio server /data
 ```
+> * Create a bucket named 'bucket'.
+> * Change policy to '*' with read and write permission.
 
 # Postgresql is the Database Engine
 ## Development Database
