@@ -17,10 +17,3 @@ export const AuthenticationContext = createContext<
 
 export default AuthenticationContext;
 
-export const useResetAuthentication = () => {
-  const state = useContext(AuthenticationContext);
-
-  Object.values(state)
-    .filter((value) => typeof value === "function")
-    .forEach((set: (value: any) => void) => set(null));
-};

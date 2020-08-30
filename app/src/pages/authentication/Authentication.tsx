@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import {
   Container,
@@ -14,8 +14,8 @@ import {
   AuthButton,
 } from "../../components/forms/AuthButton";
 import logo from "../../assets/img/app-icon.png";
-import LoginForm from "../../components/forms/LoginForm";
-import AuthenticationContext, {useResetAuthentication} from "../../components/forms/AuthenticationContext";
+import LoginForm from "../../components/forms/loginForm/LoginForm";
+import AuthenticationContext from "../../components/forms/AuthenticationContext";
 import RegisterForm from "../../components/forms/RegisterForm";
 
 export const Authentication = () => {
@@ -27,9 +27,12 @@ export const Authentication = () => {
   [state.passwordConfirmation, state.setPasswordConfirmation] = useState();
 
   const selectLogin = (value: boolean) => {
-    useResetAuthentication();
+    Object.values(state)
+      .filter((value) => typeof value === "function")
+      .forEach((set: (value: any) => void) => set(null));
+
     setLogin(value);
-  }
+  };
 
   return (
     <Container>

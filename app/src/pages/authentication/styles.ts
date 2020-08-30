@@ -28,7 +28,7 @@ export const AuthContainer = styled(BaseContainer)<BaseDivProps>`
   border-radius: 8px;
   overflow: hidden;
 
-  @media (max-width: 480px) {
+  @media (max-width: 800px) {
     border-radius: 0px;
   }
 `;
@@ -48,7 +48,7 @@ export const Card = styled.div<BaseDivProps>`
   padding: 16px 12px;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 
-  @media (max-width: 480px) {
+  @media (max-width: 800px) {
     flex-direction: column;
     max-height: 150%;
     height: auto;
