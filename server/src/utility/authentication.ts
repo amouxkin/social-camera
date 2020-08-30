@@ -1,11 +1,10 @@
-import { genSaltSync, hashSync, compareSync } from 'bcrypt';
+import { hashSync, compareSync } from 'bcrypt';
 import { sign, verify } from 'jsonwebtoken';
 import { RequestHandler, Response } from 'express';
 import { UserInstance } from 'src/database/models/user';
 
 export const createHashedPassword = (password: string): string => {
-  const salt = genSaltSync(parseInt(process.env.SALT_ROUNDS!));
-  return hashSync(password, salt);
+  return hashSync(password, parseInt(process.env.SALT_ROUNDS!));
 };
 
 export const checkHashedPassword = (
