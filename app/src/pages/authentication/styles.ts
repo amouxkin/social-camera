@@ -14,7 +14,6 @@ export const BaseContainer = styled.div<DivProps>`
 `;
 
 
-// as any is needed due to an issue -- https://github.com/microsoft/TypeScript/issues/37597
 export const Container = styled(BaseContainer)<DivProps>`
   align-content: center;
   align-items: center;
