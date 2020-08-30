@@ -16,15 +16,28 @@ export const login = async () => {
   // });
 };
 
-export const register = async (body) => {
-  await fetch(urlCreator("signup"), {
+export const logout = () => localStorage.clear();
+
+interface RegisterResponse {
+  id: number;
+  latestImage: null | string;
+  name: string;
+  token: string;
+}
+
+export const register = async (body): Promise<boolean> => {
+  return await fetch(urlCreator("signup"), {
     method: "POST",
     headers: header(),
     body: body,
   })
     .then(async (response) => {
-      console.log(response);
-      return await response.json()
+      response.json().then((register: RegisterResponse) => {
+        for (const [key, value] of Object.entries(register)) {
+          localStorage.setItem(key, value);
+        }
+      });
+      return true;
     })
     .catch((e) => {
       console.log(e);

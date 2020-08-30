@@ -25,3 +25,14 @@ export const LogoImg = styled.img`
   max-width: 1.5rem;
   max-height: 1.75rem;
 `;
+
+export const LogoutContainer = styled.div`
+  align-items: end;
+  align-content: end;
+  justify-content: flex-end;
+  justify-items: flex-end;
+  display: flex;
+  flex:1;
+  width: auto;
+  padding-right: 20px
+`;
