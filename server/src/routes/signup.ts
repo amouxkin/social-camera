@@ -20,7 +20,7 @@ const signup: RequestHandler = (request, response) => {
   User.create({
     name,
     email,
-    hashedPassword: createHashedPassword(password)
+    hashedPassword: password
   })
     .then((user) => sendToken(user, response))
     .catch((error) => response.status(409).send(error));
