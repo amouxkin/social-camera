@@ -20,6 +20,22 @@ export const Container = styled(BaseContainer as any)`
   position: relative;
 `;
 
+export const AuthContainer = styled(BaseContainer as any)`
+  background-color: aliceblue;
+  border-radius: 12px;
+`;
+
+export const AuthButtonContainer = styled(BaseContainer as any)`
+  flex-direction: row;
+  height: 32px;
+  width: 100%;
+  flex: none;
+  justify-content: space-around;
+  overflow: hidden;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+`;
+
 export const Card = styled.div`
   align-content: center;
   background: #101010;
@@ -52,8 +68,22 @@ export const LogoImage = styled.img`
   height: 180px;
   width: 158px;
 
-  @media (max-width: 480px) {
+  @media (max-width: 480px), (max-height: 720px) {
     height: 90px;
     width: 79px;
   }
+`;
+
+export const AuthButton = styled.button`
+  color: ${({ selected }) => (!selected ? "var(--gb-web-text)" : "white")};
+  background-color: ${({ selected }) =>
+    selected ? "var(--gb-red)" : "#101010"};
+  border-radius: 0px;
+  margin: 0px 0px;
+  transition: background-color 0.5s ease;
+`;
+
+export const AuthForm = styled.div`
+  background-color: aquamarine;
+  flex: 1;
 `;

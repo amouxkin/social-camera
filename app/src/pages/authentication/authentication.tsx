@@ -6,8 +6,13 @@ import {
   LogoImage,
   BaseContainer,
   IntroMessage,
+  AuthContainer,
+  AuthButtonContainer,
+  AuthButton,
+  AuthForm
 } from "./styles";
 import logo from "../../assets/img/app-icon.png";
+import LoginForm from "../../components/forms/loginForm";
 
 export const Authentication = () => {
   const [isLogin, setLogin] = useState(true);
@@ -21,9 +26,15 @@ export const Authentication = () => {
             A better way for remote teams to connect and collaborate.
           </IntroMessage>
         </BaseContainer>
-        <BaseContainer>
-          <h1>Sign Up</h1>
-        </BaseContainer>
+        <AuthContainer>
+          <AuthButtonContainer>
+            <AuthButton onClick={isLogin ? null : () => setLogin(true)} selected={isLogin}>Login</AuthButton>
+            <AuthButton onClick={!isLogin ? null : () => setLogin(false)} selected={!isLogin}>Sign Up</AuthButton>
+          </AuthButtonContainer>
+          <AuthForm>
+            <LoginForm/>
+          </AuthForm>
+        </AuthContainer>
       </Card>
     </Container>
   );
