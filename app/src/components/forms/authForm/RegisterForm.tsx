@@ -11,6 +11,7 @@ import password from "../../../assets/img/password.svg";
 
 const RegisterFrom = () => {
   const [requiredCheck, setRequired] = useState(false);
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   const submit = (e: React.FormEvent) => {
     if (!requiredCheck) setRequired(true);
@@ -18,7 +19,10 @@ const RegisterFrom = () => {
     e.preventDefault();
     const data = new FormData(e.target as HTMLFormElement);
 
-    // TODO: check password match
+    if (data.get("password") !== passwordConfirmation) {
+      return setPasswordConfirmation('');
+    }
+
     console.log(data);
   };
 
@@ -30,6 +34,7 @@ const RegisterFrom = () => {
           required={requiredCheck}
           type="text"
           name="name"
+          minLength={3}
           placeholder="Full Name"
         />
       </AuthInputContainer>
@@ -45,6 +50,7 @@ const RegisterFrom = () => {
       <AuthInputContainer>
         <AuthIcon src={password} />
         <BaseInput
+          minLength={8}
           required={requiredCheck}
           placeholder={"Password"}
           name="password"
@@ -54,6 +60,10 @@ const RegisterFrom = () => {
       <AuthInputContainer>
         <AuthIcon src={password} />
         <BaseInput
+          value={passwordConfirmation}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setPasswordConfirmation(e.target.value)
+          }
           required={requiredCheck}
           placeholder={"Password Confirmation"}
           name="passwordConfirmation"
