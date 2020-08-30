@@ -24,7 +24,6 @@ export const Container = styled(BaseContainer)<BaseDivProps>`
 `;
 
 export const AuthContainer = styled(BaseContainer)<BaseDivProps>`
-  background-color: var(--gb-white);
   border-radius: 8px;
   overflow: hidden;
 
@@ -35,7 +34,7 @@ export const AuthContainer = styled(BaseContainer)<BaseDivProps>`
 
 export const Card = styled.div<BaseDivProps>`
   align-content: center;
-  background: #101010;
+  background: var(--gb-web-grey-darker);
   border-radius: 0px;
   display: flex;
   justify-content: center;
