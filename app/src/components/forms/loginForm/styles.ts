@@ -36,5 +36,10 @@ export const AuthIcon = styled.img<ComponentPropsWithoutRef<"img">>`
 
 export const AuthInputContainer = styled.div<BaseDivProps>`
   display: flex;
-  margin-top: 16px;
+  margin-top: 24px;
+`;
+
+export const SubmitButton = styled.button<ComponentPropsWithoutRef<"button">>`
+  margin-top: 60px;
+  background-color: var(--gb-red);
 `;

@@ -35,7 +35,7 @@ export const AuthContainer = styled(BaseContainer)<BaseDivProps>`
 export const Card = styled.div<BaseDivProps>`
   align-content: center;
   background: var(--gb-web-grey-darker);
-  border-radius: 0px;
+  border-radius: 12px;
   display: flex;
   justify-content: center;
   max-height: 700px;
