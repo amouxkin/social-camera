@@ -9,14 +9,20 @@ import {
   AuthContainer,
   AuthButtonContainer,
   AuthButton,
-  AuthForm
+  AuthForm,
 } from "./styles";
 // @ts-ignore
 import logo from "../../assets/img/app-icon.png";
 import LoginForm from "../../components/forms/LoginForm";
+import AuthenticationContext from "../../components/forms/AuthenticationContext";
+import RegisterForm from "../../components/forms/RegisterForm";
 
 export const Authentication = () => {
   const [isLogin, setLogin] = useState(true);
+  const [name, setName] = useState('Hello');
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [passwordConfirmation, setPasswordConfirmation] = useState();
 
   return (
     <Container>
@@ -29,12 +35,36 @@ export const Authentication = () => {
         </BaseContainer>
         <AuthContainer>
           <AuthButtonContainer>
-            <AuthButton onClick={isLogin ? null : () => setLogin(true)} selected={isLogin}>Login</AuthButton>
-            <AuthButton onClick={!isLogin ? null : () => setLogin(false)} selected={!isLogin}>Sign Up</AuthButton>
+            <AuthButton
+              onClick={isLogin ? null : () => setLogin(true)}
+              selected={isLogin}
+            >
+              Login
+            </AuthButton>
+            <AuthButton
+              onClick={!isLogin ? null : () => setLogin(false)}
+              selected={!isLogin}
+            >
+              Sign Up
+            </AuthButton>
           </AuthButtonContainer>
-          <AuthForm>
-            <LoginForm/>
-          </AuthForm>
+          <AuthenticationContext.Provider
+            value={{
+              email,
+              setEmail,
+              name,
+              setName,
+              password,
+              setPassword,
+              passwordConfirmation,
+              setPasswordConfirmation,
+            }}
+          >
+            <AuthForm>
+              {/*<LoginForm />*/}
+              <RegisterForm/>
+            </AuthForm>
+          </AuthenticationContext.Provider>
         </AuthContainer>
       </Card>
     </Container>
