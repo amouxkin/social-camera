@@ -1,14 +1,8 @@
-import { createContext, useContext } from "react";
+import { createContext } from "react";
 
 interface AuthenticationContextProps {
-  email: string;
-  name: string;
-  password: string;
-  passwordConfirmation: string;
-  setEmail(email: any): void;
-  setName(newName: any): void;
-  setPassword(newPassword: any): void;
-  setPasswordConfirmation(newPasswordConfirmation: any): void;
+  isLoading: string;
+  setIsLoading(value: boolean): void;
 }
 
 export const AuthenticationContext = createContext<

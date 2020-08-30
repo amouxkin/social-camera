@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FormContainer } from "../styles";
 import {
   AuthIcon,
@@ -9,17 +9,19 @@ import {
 import user from "../../../assets/img/user.svg";
 import password from "../../../assets/img/password.svg";
 import { isAuthenticated, login } from "../../../lib/authentication";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
+import AuthenticationContext from "../AuthenticationContext";
 
 const LoginForm = () => {
   const [requiredCheck, setRequired] = useState(false);
+  const state = useContext(AuthenticationContext);
 
   const submit = (e: React.FormEvent) => {
     if (!requiredCheck) setRequired(true);
 
     e.preventDefault();
+    state.setIsLoading(true);
     const data = new FormData(e.target as HTMLFormElement);
-    console.log(data);
     login(
       JSON.stringify({
         email: data.get("email"),
@@ -30,7 +32,8 @@ const LoginForm = () => {
         if (!loggedIn) throw new Error("Failed to Login");
         window.location.reload();
       })
-      .catch((e) => console.log(e));
+      .catch((e) => console.log(e))
+      .finally(() => state.setIsLoading(false));
   };
 
   if (isAuthenticated()) return <Redirect to={"/"} />;

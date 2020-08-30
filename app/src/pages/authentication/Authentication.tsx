@@ -1,4 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
+import Loading from "react-loading-overlay";
+
 import {
   Container,
   Card,
@@ -21,16 +23,12 @@ import RegisterForm from "../../components/forms/authForm/RegisterForm";
 export const Authentication = () => {
   const [isLogin, setLogin] = useState(true);
   const state: any = {};
-  [state.name, state.setName] = useState();
-  [state.email, state.setEmail] = useState();
-  [state.password, state.setPassword] = useState();
-  [state.passwordConfirmation, state.setPasswordConfirmation] = useState();
+  [state.isLoading, state.setIsLoading] = useState();
 
   const selectLogin = (value: boolean) => {
     Object.values(state)
       .filter((value) => typeof value === "function")
       .forEach((set: (value: any) => void) => set(null));
-
     setLogin(value);
   };
 
@@ -45,7 +43,11 @@ export const Authentication = () => {
         </BaseContainer>
         <AuthContainer>
           <AuthenticationContext.Provider value={state}>
-            <AuthForm>{isLogin ? <LoginForm /> : <RegisterForm />}</AuthForm>
+              <Loading active={state.isLoading} spinner>
+                <AuthForm>
+                  {isLogin ? <LoginForm /> : <RegisterForm />}
+                </AuthForm>
+              </Loading>
           </AuthenticationContext.Provider>
           <AuthButtonContainer>
             {!isLogin ? (
