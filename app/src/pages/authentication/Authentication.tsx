@@ -13,7 +13,7 @@ import {
 } from "./styles";
 // @ts-ignore
 import logo from "../../assets/img/app-icon.png";
-import LoginForm from "../../components/forms/loginForm";
+import LoginForm from "../../components/forms/LoginForm";
 
 export const Authentication = () => {
   const [isLogin, setLogin] = useState(true);

@@ -6,8 +6,8 @@ import { TransitionGroup, Transition } from "react-transition-group";
 import ErrorBoundary from "./Error";
 import Header from "./components/header";
 import GlobalStyle from "./components/styles/GlobalStyle";
-import { Authentication } from "./pages/authentication/authentication";
-import PrivateRoute from "./components/privateRoute/pricateRoute";
+import { Authentication } from "./pages/authentication/Authentication";
+import PrivateRoute from "./components/privateRoute/PricateRoute";
 
 const Profile = React.lazy(() => import("./pages/profile/Profile.jsx"));
 const NotFound = React.lazy(() => import("./pages/404"));
