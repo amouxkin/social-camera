@@ -1,6 +1,6 @@
 import { genSaltSync, hashSync, compareSync } from 'bcrypt';
 import { sign, verify } from 'jsonwebtoken';
-import { RequestHandler } from 'express';
+import { RequestHandler, Response } from 'express';
 import { UserInstance } from 'src/database/models/user';
 
 export const createHashedPassword = (password: string): string => {
@@ -19,7 +19,7 @@ export const generateAccessToken = (payload: {
   name: string;
   id: number;
 }): string => {
-  return sign(payload , process.env.JWT_TOKEN_SECRET! as string, {
+  return sign(payload, process.env.JWT_TOKEN_SECRET! as string, {
     expiresIn: '1200s'
   });
 };
@@ -49,4 +49,13 @@ export const authenticationMiddleware: RequestHandler = (
 
   response.locals.id = id;
   next();
+};
+
+export const sendToken = (user: UserInstance, response: Response) => {
+  response.status(200).send({
+    token: generateAccessToken({ id: user.id, name: user.name }),
+    id: user.id,
+    name: user.name,
+    latestImage: user.latestImage
+  });
 };

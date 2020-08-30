@@ -1,9 +1,6 @@
 import { RequestHandler } from 'express';
-import { User, UserInstance } from 'src/database/models/user';
-import {
-  createHashedPassword,
-  generateAccessToken
-} from 'src/utility/authentication';
+import { User } from 'src/database/models/user';
+import { createHashedPassword, sendToken } from 'src/utility/authentication';
 
 const signup: RequestHandler = (request, response) => {
   const { name, email, password } = request.body;
@@ -25,14 +22,7 @@ const signup: RequestHandler = (request, response) => {
     email,
     hashedPassword: createHashedPassword(password)
   })
-    .then((user: UserInstance) => {
-      response.status(200).send({
-        token: generateAccessToken({ id: user.id, name: user.name }),
-        id: user.id,
-        name: user.name,
-        latestImage: user.latestImage
-      });
-    })
+    .then((user) => sendToken(user, response))
     .catch((error) => response.status(409).send(error));
 };
 
