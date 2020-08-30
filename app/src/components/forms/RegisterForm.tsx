@@ -4,9 +4,10 @@ import AuthenticationContext from "./AuthenticationContext";
 
 const RegisterForm = () => {
   const context = useContext(AuthenticationContext);
+
   return (
     <FormContainer>
-      <label>Email</label>
+      <label>Email {context.name}</label>
       <input />
       <label>Password</label>
       <input />

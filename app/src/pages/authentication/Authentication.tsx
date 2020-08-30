@@ -19,10 +19,11 @@ import RegisterForm from "../../components/forms/RegisterForm";
 
 export const Authentication = () => {
   const [isLogin, setLogin] = useState(true);
-  const [name, setName] = useState('Hello');
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [passwordConfirmation, setPasswordConfirmation] = useState();
+  const state: any = {};
+  [state.name, state.setName] = useState();
+  [state.email, state.setEmail] = useState();
+  [state.password, state.setPassword] = useState();
+  [state.passwordConfirmation, state.setPasswordConfirmation] = useState();
 
   return (
     <Container>
@@ -49,20 +50,11 @@ export const Authentication = () => {
             </AuthButton>
           </AuthButtonContainer>
           <AuthenticationContext.Provider
-            value={{
-              email,
-              setEmail,
-              name,
-              setName,
-              password,
-              setPassword,
-              passwordConfirmation,
-              setPasswordConfirmation,
-            }}
+            value={state}
           >
             <AuthForm>
               {/*<LoginForm />*/}
-              <RegisterForm/>
+              <RegisterForm />
             </AuthForm>
           </AuthenticationContext.Provider>
         </AuthContainer>
