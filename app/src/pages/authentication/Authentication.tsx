@@ -15,7 +15,7 @@ import {
 } from "../../components/forms/AuthButton";
 import logo from "../../assets/img/app-icon.png";
 import LoginForm from "../../components/forms/LoginForm";
-import AuthenticationContext from "../../components/forms/AuthenticationContext";
+import AuthenticationContext, {useResetAuthentication} from "../../components/forms/AuthenticationContext";
 import RegisterForm from "../../components/forms/RegisterForm";
 
 export const Authentication = () => {
@@ -25,6 +25,11 @@ export const Authentication = () => {
   [state.email, state.setEmail] = useState();
   [state.password, state.setPassword] = useState();
   [state.passwordConfirmation, state.setPasswordConfirmation] = useState();
+
+  const selectLogin = (value: boolean) => {
+    useResetAuthentication();
+    setLogin(value);
+  }
 
   return (
     <Container>
@@ -38,13 +43,13 @@ export const Authentication = () => {
         <AuthContainer>
           <AuthButtonContainer>
             <AuthButton
-              onClick={isLogin ? null : () => setLogin(true)}
+              onClick={isLogin ? null : () => selectLogin(true)}
               selected={isLogin}
             >
               Login
             </AuthButton>
             <AuthButton
-              onClick={!isLogin ? null : () => setLogin(false)}
+              onClick={!isLogin ? null : () => selectLogin(false)}
               selected={!isLogin}
             >
               Sign Up

@@ -11,7 +11,7 @@ export const AuthButton = styled.button<AuthButtonProps>`
     ${({ selected }) => (!selected ? "--gb-white" : "--gb-web-grey-darker")}
   );
   background-color: var(
-    ${({ selected }) => (selected ? "--gb-red" : "--gb-web-grey-darker")}
+    ${({ selected }) => (selected ? "--gb-red" : "--gb-web-light-gray")}
   );
   border-radius: 0px;
   margin: 0px 0px;

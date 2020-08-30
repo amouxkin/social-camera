@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 interface AuthenticationContextProps {
   email: string;
@@ -11,8 +11,16 @@ interface AuthenticationContextProps {
   setPasswordConfirmation(newPasswordConfirmation: any): void;
 }
 
-const AuthenticationContext = createContext<
+export const AuthenticationContext = createContext<
   Partial<AuthenticationContextProps>
 >({});
 
 export default AuthenticationContext;
+
+export const useResetAuthentication = () => {
+  const state = useContext(AuthenticationContext);
+
+  Object.values(state)
+    .filter((value) => typeof value === "function")
+    .forEach((set: (value: any) => void) => set(null));
+};
