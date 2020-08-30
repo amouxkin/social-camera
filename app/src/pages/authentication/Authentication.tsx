@@ -45,15 +45,15 @@ export const Authentication = () => {
         </BaseContainer>
         <AuthContainer>
           <AuthenticationContext.Provider value={state}>
-            <AuthForm>{!isLogin ? <LoginForm /> : <RegisterForm />}</AuthForm>
+            <AuthForm>{isLogin ? <LoginForm /> : <RegisterForm />}</AuthForm>
           </AuthenticationContext.Provider>
           <AuthButtonContainer>
             {!isLogin ? (
               <div>
                 <SwitchText>Have an account ?</SwitchText>
                 <AuthButton
-                  onClick={!isLogin ? null : () => selectLogin(true)}
-                  selected={!isLogin}
+                  onClick={isLogin ? null : () => selectLogin(true)}
+                  selected={isLogin}
                 >
                   Login
                 </AuthButton>

@@ -20,7 +20,7 @@ export const AuthButton = styled.button<AuthButtonProps>`
 
 export const AuthButtonContainer = styled(BaseContainer)<BaseDivProps>`
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   height: 40px;
   width: 100%;
   justify-content: space-around;

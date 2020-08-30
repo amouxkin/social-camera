@@ -74,7 +74,7 @@ export const LogoImage = styled.img<ComponentPropsWithoutRef<"img">>`
 `;
 
 export const AuthForm = styled.div`
-  height: 50%;
+  padding-top: 80px;
 `;
 
 export const SwitchText = styled.h3`
