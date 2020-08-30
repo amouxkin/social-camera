@@ -8,6 +8,7 @@ import {
 } from "./styles";
 import user from "../../../assets/img/user.svg";
 import password from "../../../assets/img/password.svg";
+import { register } from "../../../lib/authentication";
 
 const RegisterFrom = () => {
   const [requiredCheck, setRequired] = useState(false);
@@ -20,10 +21,18 @@ const RegisterFrom = () => {
     const data = new FormData(e.target as HTMLFormElement);
 
     if (data.get("password") !== passwordConfirmation) {
-      return setPasswordConfirmation('');
+      return setPasswordConfirmation("");
     }
 
-    console.log(data);
+    register(
+      JSON.stringify({
+        name: data.get("name"),
+        email: data.get("email"),
+        password: data.get("password"),
+      })
+    )
+      .then((r) => console.log(r))
+      .catch((e) => console.log(e));
   };
 
   return (
