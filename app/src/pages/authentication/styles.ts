@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { ComponentPropsWithoutRef } from "react";
 
-interface BaseDivProps extends ComponentPropsWithoutRef<"div"> {}
+export interface BaseDivProps extends ComponentPropsWithoutRef<"div"> {}
 
 export const BaseContainer = styled.div<BaseDivProps>`
   align-content: center;
@@ -24,30 +24,19 @@ export const Container = styled(BaseContainer)<BaseDivProps>`
 `;
 
 export const AuthContainer = styled(BaseContainer)<BaseDivProps>`
-  background-color: aliceblue;
-  border-radius: 12px;
-`;
-
-export const AuthButtonContainer = styled(BaseContainer)<BaseDivProps>`
-  flex-direction: row;
-  height: 32px;
-  width: 100%;
-  flex: none;
-  justify-content: space-around;
+  background-color: var(--gb-white);
+  border-radius: 8px;
   overflow: hidden;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  
+
   @media (max-width: 480px) {
- border-top-left-radius: 0px;
-  border-top-right-radius: 0px; 
+    border-radius: 0px;
   }
 `;
 
 export const Card = styled.div<BaseDivProps>`
   align-content: center;
   background: #101010;
-  border-radius: 10px;
+  border-radius: 0px;
   display: flex;
   justify-content: center;
   max-height: 700px;
@@ -82,27 +71,6 @@ export const LogoImage = styled.img<ComponentPropsWithoutRef<"img">>`
   @media (max-width: 480px), (max-height: 720px) {
     height: 90px;
     width: 79px;
-  }
-`;
-
-interface AuthButtonProps extends ComponentPropsWithoutRef<"button"> {
-  selected: boolean;
-}
-
-export const AuthButton = styled.button<AuthButtonProps>`
-  color: var(
-    ${({ selected }) => (!selected ? "--gb-white" : "--gb-web-grey-darker")}
-  );
-  background-color: var(
-    ${({ selected }) => (selected ? "--gb-red" : "--gb-web-grey-darker")}
-  );
-  border-radius: 0px;
-  margin: 0px 0px;
-  transition: background-color 0.5s ease;
-
-  &:hover {
-    opacity: 1;
-    background-color: var(--gb-web-red);
   }
 `;
 

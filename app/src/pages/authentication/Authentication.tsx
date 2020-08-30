@@ -7,11 +7,12 @@ import {
   BaseContainer,
   IntroMessage,
   AuthContainer,
-  AuthButtonContainer,
-  AuthButton,
   AuthForm,
 } from "./styles";
-
+import {
+  AuthButtonContainer,
+  AuthButton,
+} from "../../components/forms/AuthButton";
 import logo from "../../assets/img/app-icon.png";
 import LoginForm from "../../components/forms/LoginForm";
 import AuthenticationContext from "../../components/forms/AuthenticationContext";
