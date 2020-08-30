@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { CSSTransition } from "react-transition-group";
-import { Container, Card, LogoImage, LogoContainer } from "./styles";
+import {
+  Container,
+  Card,
+  LogoImage,
+  BaseContainer,
+  IntroMessage,
+} from "./styles";
 import logo from "../../assets/img/app-icon.png";
 
 export const Authentication = () => {
@@ -9,10 +15,15 @@ export const Authentication = () => {
   return (
     <Container>
       <Card>
-        <LogoContainer>
+        <BaseContainer>
           <LogoImage src={logo} />
-        </LogoContainer>
-        <h1>Sign Up</h1>
+          <IntroMessage>
+            A better way for remote teams to connect and collaborate.
+          </IntroMessage>
+        </BaseContainer>
+        <BaseContainer>
+          <h1>Sign Up</h1>
+        </BaseContainer>
       </Card>
     </Container>
   );
