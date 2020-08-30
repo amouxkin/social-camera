@@ -7,32 +7,27 @@ interface AuthButtonProps extends ComponentPropsWithoutRef<"button"> {
 }
 
 export const AuthButton = styled.button<AuthButtonProps>`
-  color: var(
-    ${({ selected }) => (!selected ? "--gb-white" : "--gb-web-grey-darker")}
-  );
-  background-color: var(
-    ${({ selected }) => (selected ? "--gb-red" : "--gb-web-light-gray")}
-  );
-  border-radius: 0px;
-  margin: 0px 0px;
   transition: background-color 0.5s ease;
-
+  background: transparent none repeat scroll 0 0;
+  color: var( ${({selected}) => !selected ? "--gb-white" : "--gb-web-grey-dark" } );
+  padding: 15px;
+  text-decoration: none;
+ 
   &:hover {
-    opacity: 1;
-    background-color: var(--gb-web-red);
+    opacity: 0.5;
   }
 `;
 
 export const AuthButtonContainer = styled(BaseContainer)<BaseDivProps>`
   flex-direction: row;
+  align-items: flex-start;
   height: 40px;
   width: 100%;
-  flex: none;
   justify-content: space-around;
   overflow: hidden;
 
-  @media (max-width: 480px) {
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
+  @media (max-width: 720px) {
+    flex: 1;
+    align-items: center;
   }
 `;

@@ -74,6 +74,11 @@ export const LogoImage = styled.img<ComponentPropsWithoutRef<"img">>`
 `;
 
 export const AuthForm = styled.div`
-  flex: 1;
   height: 50%;
+`;
+
+export const SwitchText = styled.h3`
+  text-align: center;
+  width: 100%;
+  color: var(--gb-web-grey-medium);
 `;

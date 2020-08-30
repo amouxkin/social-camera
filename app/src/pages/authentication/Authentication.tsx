@@ -8,15 +8,16 @@ import {
   IntroMessage,
   AuthContainer,
   AuthForm,
+  SwitchText,
 } from "./styles";
 import {
   AuthButtonContainer,
   AuthButton,
 } from "../../components/forms/AuthButton";
 import logo from "../../assets/img/app-icon.png";
-import LoginForm from "../../components/forms/loginForm/LoginForm";
+import LoginForm from "../../components/forms/authForm/LoginForm";
 import AuthenticationContext from "../../components/forms/AuthenticationContext";
-import RegisterForm from "../../components/forms/RegisterForm";
+import RegisterForm from "../../components/forms/authForm/RegisterForm";
 
 export const Authentication = () => {
   const [isLogin, setLogin] = useState(true);
@@ -44,23 +45,32 @@ export const Authentication = () => {
           </IntroMessage>
         </BaseContainer>
         <AuthContainer>
-          <AuthButtonContainer>
-            <AuthButton
-              onClick={isLogin ? null : () => selectLogin(true)}
-              selected={isLogin}
-            >
-              Login
-            </AuthButton>
-            <AuthButton
-              onClick={!isLogin ? null : () => selectLogin(false)}
-              selected={!isLogin}
-            >
-              Sign Up
-            </AuthButton>
-          </AuthButtonContainer>
           <AuthenticationContext.Provider value={state}>
             <AuthForm>{isLogin ? <LoginForm /> : <RegisterForm />}</AuthForm>
           </AuthenticationContext.Provider>
+          <AuthButtonContainer>
+            {!isLogin ? (
+              <div>
+                <SwitchText>Have an account ?</SwitchText>
+                <AuthButton
+                  onClick={isLogin ? null : () => selectLogin(true)}
+                  selected={isLogin}
+                >
+                  Login
+                </AuthButton>
+              </div>
+            ) : (
+              <div>
+                <SwitchText>Need an account ?</SwitchText>
+                <AuthButton
+                  onClick={!isLogin ? null : () => selectLogin(false)}
+                  selected={!isLogin}
+                >
+                  Sign Up
+                </AuthButton>
+              </div>
+            )}
+          </AuthButtonContainer>
         </AuthContainer>
       </Card>
     </Container>
