@@ -1,6 +1,10 @@
 import styled from "styled-components";
+import { ComponentPropsWithoutRef, ComponentPropsWithRef } from "react";
 
-export const BaseContainer = styled.div`
+// interface DivProps extends ComponentPropsWithoutRef<"div"> {}
+interface DivProps extends ComponentPropsWithRef<"div"> {}
+
+export const BaseContainer = styled.div<DivProps>`
   align-content: center;
   align-items: center;
   display: flex;
@@ -9,7 +13,9 @@ export const BaseContainer = styled.div`
   flex: 1;
 `;
 
-export const Container = styled(BaseContainer as any)`
+
+// as any is needed due to an issue -- https://github.com/microsoft/TypeScript/issues/37597
+export const Container = styled(BaseContainer)<DivProps>`
   align-content: center;
   align-items: center;
   background: rgb(68, 68, 68);
@@ -53,9 +59,10 @@ export const Card = styled.div`
 
   @media (max-width: 480px) {
     flex-direction: column;
-    max-height: 100%;
-    height: 95%;
-    width: 95%;
+    max-height: 150%;
+    height: auto;
+    min-height: 95%;
+    min-width: 95%;
   }
 `;
 
@@ -74,7 +81,9 @@ export const LogoImage = styled.img`
   }
 `;
 
-export const AuthButton = styled.button`
+export const AuthButton = styled.button<
+  ComponentPropsWithoutRef<"button"> & { selected: boolean }
+>`
   color: ${({ selected }) => (!selected ? "var(--gb-web-text)" : "white")};
   background-color: ${({ selected }) =>
     selected ? "var(--gb-red)" : "#101010"};
@@ -84,6 +93,5 @@ export const AuthButton = styled.button`
 `;
 
 export const AuthForm = styled.div`
-  background-color: aquamarine;
   flex: 1;
 `;

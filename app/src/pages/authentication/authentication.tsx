@@ -11,6 +11,7 @@ import {
   AuthButton,
   AuthForm
 } from "./styles";
+// @ts-ignore
 import logo from "../../assets/img/app-icon.png";
 import LoginForm from "../../components/forms/loginForm";
 
