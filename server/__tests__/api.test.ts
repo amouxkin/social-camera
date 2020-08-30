@@ -7,7 +7,6 @@ import { resolve } from 'path';
 import url from 'url';
 import { sequelize } from 'src/database/engine';
 import { User } from 'src/database/models/user';
-import { response } from 'express';
 
 const testApp = supertest(app);
 
@@ -78,25 +77,25 @@ describe('Authentication', () => {
         })
         .then((response) => {
           expect(response.status).toBe(200);
-          done()
+          done();
         });
     });
 
-    test('Return 422, User -- when password is missing.',  async (done) => {
+    test('Return 422, User -- when password is missing.', async (done) => {
       testApp
         .post('/signup')
         .set('Accept', 'application/json')
         .send({
           name: 'tester',
-          email: 'tester@gmail.com',
+          email: 'tester@gmail.com'
         })
         .then((response) => {
           expect(response.status).toBe(422);
-          done()
+          done();
         });
     });
 
-    test('Return 422, User -- when name is missing.',  async (done) => {
+    test('Return 422, User -- when name is missing.', async (done) => {
       testApp
         .post('/signup')
         .set('Accept', 'application/json')
@@ -106,11 +105,11 @@ describe('Authentication', () => {
         })
         .then((response) => {
           expect(response.status).toBe(422);
-          done()
+          done();
         });
     });
 
-    test('Return 422, User -- when email is missing.',  async (done) => {
+    test('Return 422, User -- when email is missing.', async (done) => {
       testApp
         .post('/signup')
         .set('Accept', 'application/json')
@@ -120,8 +119,49 @@ describe('Authentication', () => {
         })
         .then((response) => {
           expect(response.status).toBe(422);
-          done()
+          done();
         });
     });
+  });
+});
+
+describe('Update Latest Url', () => {
+  beforeAll(async () => {
+    const tester = await User.findOne({
+      where: {
+        name: 'tester',
+        email: 'tester@gmail.com'
+      }
+    });
+    tester?.destroy();
+  });
+
+  test('Update latest Url -- when url is passed', async (done) => {
+    const token = await testApp
+      .post('/signup')
+      .set('Accept', 'application/json')
+      .send({
+        name: 'tester',
+        email: 'tester@gmail.com',
+        password: 'password'
+      });
+
+    const latestImage = 'http://www.test.com';
+
+    testApp
+      .post('/update-latest-url')
+      .set('Authorization', 'Bearer ' + token.body.token)
+      .set('Accept', 'application/json')
+      .send({
+        latestImage
+      })
+      .expect(200)
+      .then((response) => {
+        User.findOne({ where: { email: 'tester@gmail.com' } }).then((user) => {
+          console.log(user?.latestImage);
+          expect(user?.latestImage).toBe(latestImage);
+          done();
+        });
+      });
   });
 });
