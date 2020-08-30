@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FormContainer } from "../../styles/index";
+import { FormContainer } from "../styles";
 import {
   AuthIcon,
   AuthInputContainer,
@@ -19,7 +19,6 @@ const RegisterFrom = () => {
     const data = new FormData(e.target as HTMLFormElement);
 
     // TODO: check password match
-
     console.log(data);
   };
 
@@ -27,21 +26,41 @@ const RegisterFrom = () => {
     <FormContainer onSubmit={submit}>
       <AuthInputContainer>
         <AuthIcon src={user} />
-        <BaseInput required={requiredCheck} type="text" name="name" placeholder="Full Name" />
+        <BaseInput
+          required={requiredCheck}
+          type="text"
+          name="name"
+          placeholder="Full Name"
+        />
       </AuthInputContainer>
       <AuthInputContainer>
         <AuthIcon src={user} />
-        <BaseInput required={requiredCheck} type="email" name="email" placeholder="Email" />
+        <BaseInput
+          required={requiredCheck}
+          type="email"
+          name="email"
+          placeholder="Email"
+        />
       </AuthInputContainer>
       <AuthInputContainer>
         <AuthIcon src={password} />
-        <BaseInput required={requiredCheck} placeholder={"Password"} name="password" type="password" />
+        <BaseInput
+          required={requiredCheck}
+          placeholder={"Password"}
+          name="password"
+          type="password"
+        />
       </AuthInputContainer>
       <AuthInputContainer>
         <AuthIcon src={password} />
-        <BaseInput required={requiredCheck} placeholder={"Password Confirmation"} name="passwordConfirmation" type="password" />
+        <BaseInput
+          required={requiredCheck}
+          placeholder={"Password Confirmation"}
+          name="passwordConfirmation"
+          type="password"
+        />
       </AuthInputContainer>
-      <SubmitButton/>
+      <SubmitButton />
     </FormContainer>
   );
 };
