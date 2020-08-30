@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ToastProvider } from "react-toast-notifications";
+import { TransitionGroup, Transition } from "react-transition-group";
 
 import ErrorBoundary from "./Error";
 import Header from "./components/header";
@@ -22,8 +23,8 @@ const App = () => (
         <GlobalStyle />
         <Router>
           <Header />
-          <Route path={"/auth"} component={Authentication} />
           <Switch>
+            <Route path={"/auth"} component={Authentication} />
             <PrivateRoute exact path="/" component={Profile} />
             <Route path="*" component={NotFound} />
           </Switch>
