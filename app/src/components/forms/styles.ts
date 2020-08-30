@@ -7,5 +7,6 @@ export const FormContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex: 1;
+  min-height: 200px;
   height: 100%;
 `;

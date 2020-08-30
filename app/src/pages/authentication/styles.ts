@@ -108,4 +108,5 @@ export const AuthButton = styled.button<AuthButtonProps>`
 
 export const AuthForm = styled.div`
   flex: 1;
+  height: 50%;
 `;

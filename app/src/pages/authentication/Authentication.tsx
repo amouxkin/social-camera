@@ -11,7 +11,7 @@ import {
   AuthButton,
   AuthForm,
 } from "./styles";
-// @ts-ignore
+
 import logo from "../../assets/img/app-icon.png";
 import LoginForm from "../../components/forms/LoginForm";
 import AuthenticationContext from "../../components/forms/AuthenticationContext";
@@ -49,13 +49,8 @@ export const Authentication = () => {
               Sign Up
             </AuthButton>
           </AuthButtonContainer>
-          <AuthenticationContext.Provider
-            value={state}
-          >
-            <AuthForm>
-              {/*<LoginForm />*/}
-              <RegisterForm />
-            </AuthForm>
+          <AuthenticationContext.Provider value={state}>
+            <AuthForm>{isLogin ? <LoginForm /> : <RegisterForm />}</AuthForm>
           </AuthenticationContext.Provider>
         </AuthContainer>
       </Card>
