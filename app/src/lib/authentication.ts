@@ -1,23 +1,3 @@
-export const isAuthenticated = (): boolean => "token" in localStorage;
-
-const urlCreator = (url: string): string =>
-  `${process.env.REACT_APP_BACKEND}/${url}`;
-
-const responseJson = async (response) => await response.json();
-
-const header = (type = "application/json") => ({
-  "Content-Type": type,
-  Authorization: `Bearer ${localStorage.getItem("token")}`,
-});
-
-export const login = async () => {
-  // fetch({
-  //   url: `${process.env.REACT_APP_BACKEND}/login`,
-  // });
-};
-
-export const logout = () => localStorage.clear();
-
 interface RegisterResponse {
   id: number;
   latestImage: null | string;
@@ -25,14 +5,25 @@ interface RegisterResponse {
   token: string;
 }
 
-export const register = async (body): Promise<boolean> => {
-  return await fetch(urlCreator("signup"), {
+export const isAuthenticated = (): boolean => "token" in localStorage;
+
+const urlCreator = (url: string): string =>
+  `${process.env.REACT_APP_BACKEND}/${url}`;
+
+const header = (type = "application/json") => ({
+  "Content-Type": type,
+  Authorization: `Bearer ${localStorage.getItem("token")}`,
+});
+
+const authenticate = async (auth: "login" | "signup", body) =>
+  await fetch(urlCreator(auth), {
     method: "POST",
     headers: header(),
     body: body,
   })
     .then(async (response) => {
-      response.json().then((register: RegisterResponse) => {
+      response.json()
+        .then((register: RegisterResponse) => {
         for (const [key, value] of Object.entries(register)) {
           localStorage.setItem(key, value);
         }
@@ -43,4 +34,11 @@ export const register = async (body): Promise<boolean> => {
       console.log(e);
       return false;
     });
-};
+
+export const login = async (body): Promise<boolean> =>
+  authenticate("login", body);
+
+export const register = async (body): Promise<boolean> =>
+  authenticate("signup", body);
+
+export const logout = () => localStorage.clear();

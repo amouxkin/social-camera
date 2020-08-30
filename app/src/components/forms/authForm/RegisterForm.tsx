@@ -8,8 +8,8 @@ import {
 } from "./styles";
 import user from "../../../assets/img/user.svg";
 import password from "../../../assets/img/password.svg";
-import { register } from "../../../lib/authentication";
-import { useHistory } from "react-router-dom";
+import { isAuthenticated, register } from "../../../lib/authentication";
+import { Redirect, useHistory } from "react-router-dom";
 
 const RegisterFrom = () => {
   const [requiredCheck, setRequired] = useState(false);
@@ -34,11 +34,12 @@ const RegisterFrom = () => {
     )
       .then((registered) => {
         if (!registered) throw new Error('Failed to assign token.')
-        let history = useHistory();
-        history.push("/");
+        window.location.reload();
       })
       .catch((e) => console.log(e));
   };
+
+  if (isAuthenticated()) return <Redirect to={"/"} />;
 
   return (
     <FormContainer onSubmit={submit}>

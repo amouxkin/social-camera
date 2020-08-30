@@ -8,7 +8,7 @@ import {
   LogoutContainer,
 } from "./style";
 import { AuthButton } from "../forms/AuthButton";
-import { logout } from "../../lib/authentication";
+import { isAuthenticated, logout } from "../../lib/authentication";
 
 const Header = () => {
   const title = "Social Camera";
@@ -27,11 +27,13 @@ const Header = () => {
           <Logo>{title}</Logo>
         </LogoWrapper>
       </Link>
-      <LogoutContainer>
-        <div>
-          <AuthButton onClick={onClick}>Logout</AuthButton>
-        </div>
-      </LogoutContainer>
+      {isAuthenticated() && (
+        <LogoutContainer>
+          <div>
+            <AuthButton onClick={onClick}>Logout</AuthButton>
+          </div>
+        </LogoutContainer>
+      )}
     </HeaderContainer>
   );
 };
