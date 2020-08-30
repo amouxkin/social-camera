@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { ComponentPropsWithoutRef } from "react";
 
-export const FormContainer = styled.div`
+export const FormContainer = styled.form<ComponentPropsWithoutRef<"form">>`
   align-content: center;
   align-items: center;
   display: flex;
