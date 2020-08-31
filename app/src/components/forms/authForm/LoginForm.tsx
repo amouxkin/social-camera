@@ -37,10 +37,11 @@ const LoginForm = () => {
         password: data.get("password"),
       })
     )
-      .then((loggedIn) => {
+      .then(async (loggedIn) => {
         if (!loggedIn) throw new Error("Failed to Login");
         loggedInMessage(`Welcome ${localStorage.getItem("name")}`);
-        userName.setName(localStorage.getItem("name"))
+        // To execute the function after component is loaded.
+        setTimeout(() => userName.setName(localStorage.getItem("name")), 0);
       })
       .catch((e) =>
         addToast(`Login Failed: ${e}`, {

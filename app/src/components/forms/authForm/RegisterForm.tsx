@@ -48,9 +48,7 @@ const RegisterFrom = () => {
           appearance: "success",
           autoDismiss: true,
         });
-        userName.setName(localStorage.getItem("name"))
-
-        window.location.reload();
+        setTimeout(() => userName.setName(localStorage.getItem("name")), 0);
       })
       .catch((e) =>
         addToast(`Login Failed: ${e}`, {
