@@ -21,7 +21,7 @@ const Profile = () => {
   const { addToast } = useToasts();
 
   const capture = () => {
-    const image = (state.webcamRef.current.getScreenshot());
+    const image = state.webcamRef.current.getScreenshot();
 
     setLoading(true);
 
@@ -51,7 +51,7 @@ const Profile = () => {
 
   return (
     <Layout title="Take a snapshot">
-      <Loading active={isLoading} spinner >
+      <Loading active={isLoading} spinner>
         <Flex>
           <ProfileContext.Provider value={state}>
             <Wrapper>
@@ -63,12 +63,12 @@ const Profile = () => {
               </Button>
             </Wrapper>
             <Wrapper>
-              {!state.image ? (
+              {!uploadUrl ? (
                 <Camera>uploaded snapshot shows here</Camera>
               ) : (
                 <Image src={uploadUrl} alt={"image"} />
               )}
-              <Button className="green" onClick={() => state.setImage(null)}>
+              <Button className="green" onClick={() => setUploadUrl(null)}>
                 Clear
               </Button>
             </Wrapper>

@@ -26,5 +26,6 @@ export const Image = styled.img<ComponentPropsWithoutRef<"img">>`
 export const UploadButton = styled.button<ComponentPropsWithoutRef<"button">>`
   background-color: var(--gb-web-red);
   width: 620px;
+  min-height: 400px;
   margin-left: 10px;
 `;
