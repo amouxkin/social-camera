@@ -4,7 +4,9 @@ import { isAuthenticated } from "../../lib/authentication";
 
 interface PrivateRouteProps extends RouteProps {}
 
-const PrivateRoute: FC<PrivateRouteProps> = (props) =>
+export const PrivateRoute: FC<PrivateRouteProps> = (props) =>
   isAuthenticated() ? <Route {...props} /> : <Redirect to={"/auth"} />;
 
-export default PrivateRoute;
+export const PrivateOnlyRoute: FC<PrivateRouteProps> = (props) =>
+  isAuthenticated() ? <Route {...props} /> : <></>;
+

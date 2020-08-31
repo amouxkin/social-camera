@@ -17,7 +17,7 @@ import {
 } from "../../components/forms/AuthButton";
 import logo from "../../assets/img/app-icon.png";
 import LoginForm from "../../components/forms/authForm/LoginForm";
-import AuthenticationContext from "../../components/forms/AuthenticationContext";
+import AuthenticationContext from "../../contexts/AuthenticationContext";
 import RegisterForm from "../../components/forms/authForm/RegisterForm";
 
 export const Authentication = () => {

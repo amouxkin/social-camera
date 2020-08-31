@@ -7,7 +7,7 @@ import ErrorBoundary from "./Error";
 import Header from "./components/header";
 import GlobalStyle from "./components/styles/GlobalStyle";
 import { Authentication } from "./pages/authentication/Authentication";
-import PrivateRoute from "./components/privateRoute/PricateRoute";
+import { PrivateRoute } from "./components/privateRoute/PrivateRoute";
 
 const Profile = React.lazy(() => import("./pages/profile/Profile.jsx"));
 const NotFound = React.lazy(() => import("./pages/404"));

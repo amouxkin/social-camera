@@ -12,12 +12,14 @@ import user from "../../../assets/img/user.svg";
 import password from "../../../assets/img/password.svg";
 import { isAuthenticated, login } from "../../../lib/authentication";
 import { Redirect } from "react-router-dom";
-import AuthenticationContext from "../AuthenticationContext";
+import AuthenticationContext from "../../../contexts/AuthenticationContext";
+import { useDelayedAlert } from "../../../lib/utility";
 
 const LoginForm = () => {
   const [requiredCheck, setRequired] = useState(false);
   const state = useContext(AuthenticationContext);
   const { addToast } = useToasts();
+  const loggedInMessage =  useDelayedAlert(`Welcome ${localStorage.getItem("name")}`);
 
   const submit = (e: React.FormEvent) => {
     if (!requiredCheck) setRequired(true);
@@ -33,13 +35,7 @@ const LoginForm = () => {
     )
       .then((loggedIn) => {
         if (!loggedIn) throw new Error("Failed to Login");
-
-        addToast(`Welcome ${localStorage.getItem("name")}`, {
-          appearance: "success",
-          autoDismiss: true,
-        });
-
-        window.location.reload();
+        loggedInMessage();
       })
       .catch((e) =>
         addToast(`Login Failed: ${e}`, {

@@ -12,7 +12,7 @@ import {
 import user from "../../../assets/img/user.svg";
 import password from "../../../assets/img/password.svg";
 import { isAuthenticated, register } from "../../../lib/authentication";
-import AuthenticationContext from "../AuthenticationContext";
+import AuthenticationContext from "../../../contexts/AuthenticationContext";
 
 const RegisterFrom = () => {
   const [requiredCheck, setRequired] = useState(false);

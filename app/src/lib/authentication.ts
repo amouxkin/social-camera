@@ -1,3 +1,6 @@
+import { refreshBrowser } from "./utility";
+import { useEffect } from "react";
+
 interface RegisterResponse {
   id: number;
   latestImage: null | string;
@@ -22,8 +25,7 @@ const authenticate = async (auth: "login" | "signup", body) =>
     body: body,
   })
     .then(async (response) => {
-      response.json()
-        .then((register: RegisterResponse) => {
+      response.json().then((register: RegisterResponse) => {
         for (const [key, value] of Object.entries(register)) {
           localStorage.setItem(key, value);
         }
@@ -42,3 +44,38 @@ export const register = async (body): Promise<boolean> =>
   authenticate("signup", body);
 
 export const logout = () => localStorage.clear();
+
+const unauthorised = async (response: Response): Promise<Response> => {
+  if (response.status === 403) {
+    localStorage.clear();
+    refreshBrowser();
+    throw new Error("Unauthorised");
+  }
+  return response;
+};
+
+export const getUnsignedUrl = async (): Promise<any> => {
+  fetch(urlCreator("get-presigned-url"), {
+    headers: header(),
+  }).then(unauthorised)
+    .then((response) => {
+      response.json().then((parsed) => {
+        return parsed.url;
+      });
+    })
+};
+
+export const uploadImage = async (image: string, url) => {
+  fetch(urlCreator(url), {
+    method: "PUT",
+    body: JSON.stringify({
+      file: image,
+    }),
+  })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
