@@ -14,12 +14,14 @@ import { isAuthenticated, login } from "../../../lib/authentication";
 import { Redirect } from "react-router-dom";
 import AuthenticationContext from "../../../contexts/AuthenticationContext";
 import { useDelayedAlert } from "../../../lib/utility";
+import { UserContext } from "../../../contexts/UserContext";
 
 const LoginForm = () => {
   const [requiredCheck, setRequired] = useState(false);
   const state = useContext(AuthenticationContext);
   const { addToast } = useToasts();
   const loggedInMessage = useDelayedAlert();
+  const userName = useContext(UserContext);
 
   const submit = (e: React.FormEvent) => {
     if (!requiredCheck) setRequired(true);
@@ -38,6 +40,7 @@ const LoginForm = () => {
       .then((loggedIn) => {
         if (!loggedIn) throw new Error("Failed to Login");
         loggedInMessage(`Welcome ${localStorage.getItem("name")}`);
+        userName.setName(localStorage.getItem("name"))
       })
       .catch((e) =>
         addToast(`Login Failed: ${e}`, {

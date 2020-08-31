@@ -13,12 +13,14 @@ import user from "../../../assets/img/user.svg";
 import password from "../../../assets/img/password.svg";
 import { isAuthenticated, register } from "../../../lib/authentication";
 import AuthenticationContext from "../../../contexts/AuthenticationContext";
+import { UserContext } from "../../../contexts/UserContext";
 
 const RegisterFrom = () => {
   const [requiredCheck, setRequired] = useState(false);
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const state = useContext(AuthenticationContext);
   const { addToast } = useToasts();
+  const userName = useContext(UserContext);
 
   const submit = (e: React.FormEvent) => {
     if (!requiredCheck) setRequired(true);
@@ -46,6 +48,7 @@ const RegisterFrom = () => {
           appearance: "success",
           autoDismiss: true,
         });
+        userName.setName(localStorage.getItem("name"))
 
         window.location.reload();
       })

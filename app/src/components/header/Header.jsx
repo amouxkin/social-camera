@@ -9,7 +9,7 @@ import {
 } from './style';
 import { AuthButton } from '../forms/authForm/AuthButton';
 import { isAuthenticated, logout } from '../../lib/authentication';
-import AuthenticationContext from '../../contexts/AuthenticationContext';
+import { UserContext } from '../../contexts/UserContext';
 
 const Header = () => {
   const title = 'Social Camera';
@@ -17,10 +17,11 @@ const Header = () => {
     logout();
     window.location.reload();
   };
+  const userName = useContext(UserContext);
 
   useEffect(() => {
     console.log(isAuthenticated());
-  }, [window.location]);
+  }, [userName.name]);
 
   return (
     <HeaderContainer>
