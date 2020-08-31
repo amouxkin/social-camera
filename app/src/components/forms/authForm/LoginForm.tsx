@@ -10,7 +10,7 @@ import {
 } from "./styles";
 import user from "../../../assets/img/user.svg";
 import password from "../../../assets/img/password.svg";
-import { isAuthenticated, login } from "../../../lib/authentication";
+import { isAuthenticated, login } from "../../../lib/fetchHelper";
 import { Redirect } from "react-router-dom";
 import AuthenticationContext from "../../../contexts/AuthenticationContext";
 import { useDelayedAlert } from "../../../lib/utility";

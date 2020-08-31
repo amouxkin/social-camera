@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Route, RouteProps, Redirect } from "react-router-dom";
-import { isAuthenticated } from "../../lib/authentication";
+import { isAuthenticated } from "../../lib/fetchHelper";
 
 interface PrivateRouteProps extends RouteProps {}
 

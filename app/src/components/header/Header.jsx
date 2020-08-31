@@ -8,7 +8,7 @@ import {
   LogoutContainer,
 } from './style';
 import { AuthButton } from '../forms/authForm/AuthButton';
-import { isAuthenticated, logout } from '../../lib/authentication';
+import { isAuthenticated, logout } from '../../lib/fetchHelper';
 import { UserContext } from '../../contexts/UserContext';
 
 const Header = () => {

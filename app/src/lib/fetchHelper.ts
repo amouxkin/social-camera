@@ -60,7 +60,7 @@ export const getUnsignedUrl = async (): Promise<any> => {
 };
 
 export const uploadImage = async (image: string, url) => {
-  fetch(urlCreator(url), {
+  fetch(url, {
     method: "PUT",
     body: JSON.stringify({
       file: image,

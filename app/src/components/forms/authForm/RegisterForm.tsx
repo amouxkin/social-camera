@@ -11,7 +11,7 @@ import {
 } from "./styles";
 import user from "../../../assets/img/user.svg";
 import password from "../../../assets/img/password.svg";
-import { isAuthenticated, register } from "../../../lib/authentication";
+import { isAuthenticated, register } from "../../../lib/fetchHelper";
 import AuthenticationContext from "../../../contexts/AuthenticationContext";
 import { UserContext } from "../../../contexts/UserContext";
 

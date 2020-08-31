@@ -2,10 +2,11 @@ import React, { useRef, useState } from "react";
 import { useToasts } from "react-toast-notifications";
 import { Layout } from "../../components/layout";
 import { Button, Flex } from "../../components/styles";
-import { Camera, Wrapper, Image } from "./style";
+import { Camera, Wrapper, Image, UploadButton } from "./style";
 import { WebcamComponent } from "../../components/webcam/Webcam";
 import { ProfileContext } from "../../contexts/ProfileContext";
-import { getUnsignedUrl } from "../../lib/authentication";
+import { getUnsignedUrl, uploadImage } from "../../lib/fetchHelper";
+import Loading from "react-loading-overlay";
 
 const Profile = () => {
   const state: any = {
@@ -16,6 +17,7 @@ const Profile = () => {
   [state.width, state.setWidth] = useState(1280);
   [state.image, state.setImage] = useState(null);
   const [uploadUrl, setUploadUrl] = useState();
+  const [isLoading, setLoading] = useState(false);
   const { addToast } = useToasts();
 
   const capture = () => {
@@ -33,28 +35,44 @@ const Profile = () => {
         });
   };
 
+  const upload = () => {
+    setLoading(true);
+
+
+    // Wait until url is fetched.
+
+    uploadImage(state.image, uploadUrl)
+      .then((r) => console.log(r))
+      .catch((e) => console.log(e));
+  };
+
   return (
     <Layout title="Take a snapshot">
-      <Flex>
-        <ProfileContext.Provider value={state}>
-          <Wrapper>
-            <Camera>
-              <WebcamComponent />
-            </Camera>
-            <Button className="primary" onClick={capture}>
-              Take shot
-            </Button>
-          </Wrapper>
-          <Wrapper>
-            {!state.image ? (
-              <Camera>uploaded snapshot shows here</Camera>
-            ) : (
-              <Image src={state.image}  alt={"image"}/>
-            )}
-            <Button className="green" onClick={() => state.setImage(null)}>Clear</Button>
-          </Wrapper>
-        </ProfileContext.Provider>
-      </Flex>
+      <Loading>
+        <Flex>
+          <ProfileContext.Provider value={state}>
+            <Wrapper>
+              <Camera>
+                <WebcamComponent />
+              </Camera>
+              <Button className="primary" onClick={capture}>
+                Take shot
+              </Button>
+            </Wrapper>
+            <Wrapper>
+              {!state.image ? (
+                <Camera>uploaded snapshot shows here</Camera>
+              ) : (
+                <Image src={state.image} alt={"image"} />
+              )}
+              <Button className="green" onClick={() => state.setImage(null)}>
+                Clear
+              </Button>
+            </Wrapper>
+          </ProfileContext.Provider>
+        </Flex>
+        <UploadButton onClick={upload}>Upload</UploadButton>
+      </Loading>
     </Layout>
   );
 };
