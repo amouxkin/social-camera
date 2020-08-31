@@ -1,4 +1,6 @@
 import React, { useContext, useState } from "react";
+import { useToasts } from "react-toast-notifications";
+
 import { FormContainer } from "../styles";
 import {
   AuthIcon,
@@ -15,6 +17,7 @@ import AuthenticationContext from "../AuthenticationContext";
 const LoginForm = () => {
   const [requiredCheck, setRequired] = useState(false);
   const state = useContext(AuthenticationContext);
+  const { addToast } = useToasts();
 
   const submit = (e: React.FormEvent) => {
     if (!requiredCheck) setRequired(true);
@@ -30,9 +33,20 @@ const LoginForm = () => {
     )
       .then((loggedIn) => {
         if (!loggedIn) throw new Error("Failed to Login");
+
+        addToast(`Welcome ${localStorage.getItem("name")}`, {
+          appearance: "success",
+          autoDismiss: true,
+        });
+
         window.location.reload();
       })
-      .catch((e) => console.log(e))
+      .catch((e) =>
+        addToast(`Login Failed: ${e}`, {
+          appearance: "error",
+          autoDismiss: true,
+        })
+      )
       .finally(() => state.setIsLoading(false));
   };
 

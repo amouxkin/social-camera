@@ -1,4 +1,7 @@
 import React, { useContext, useState } from "react";
+import { useToasts } from "react-toast-notifications";
+import { Redirect, useHistory } from "react-router-dom";
+
 import { FormContainer } from "../styles";
 import {
   AuthIcon,
@@ -9,13 +12,13 @@ import {
 import user from "../../../assets/img/user.svg";
 import password from "../../../assets/img/password.svg";
 import { isAuthenticated, register } from "../../../lib/authentication";
-import { Redirect, useHistory } from "react-router-dom";
 import AuthenticationContext from "../AuthenticationContext";
 
 const RegisterFrom = () => {
   const [requiredCheck, setRequired] = useState(false);
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const state = useContext(AuthenticationContext);
+  const { addToast } = useToasts();
 
   const submit = (e: React.FormEvent) => {
     if (!requiredCheck) setRequired(true);
@@ -38,9 +41,20 @@ const RegisterFrom = () => {
     )
       .then((registered) => {
         if (!registered) throw new Error("Failed to assign token.");
+
+        addToast(`Welcome ${localStorage.getItem("name")}`, {
+          appearance: "success",
+          autoDismiss: true,
+        });
+
         window.location.reload();
       })
-      .catch((e) => console.log(e))
+      .catch((e) =>
+        addToast(`Login Failed: ${e}`, {
+          appearance: "error",
+          autoDismiss: true,
+        })
+      )
       .finally(() => state.setIsLoading(false));
   };
 

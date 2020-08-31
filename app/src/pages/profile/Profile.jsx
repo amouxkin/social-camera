@@ -9,9 +9,10 @@ const Profile = () => (
   <Layout title="Take a snapshot">
     <Flex>
       <Wrapper>
-        <Camera>
-          Webcam stream shows here
-        </Camera>
+        {/*<Camera>*/}
+        {/*  Webcam stream shows here*/}
+        {/*</Camera>*/}
+        <input type="file" accept="image/*;capture=camera"/>
         <Button className="primary">Take shot</Button>
       </Wrapper>
       <Wrapper>

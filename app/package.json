@@ -7,8 +7,8 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "clean": "rm dist/bundle.js",
-    "start": "dotenv -e .env -e .env.prod parcel serve src/public/index.html",
+    "clean": "rm -rf  dist",
+    "start": "dotenv -e .env -e .env.prod -- parcel serve src/public/index.html",
     "build-prod": "dotenv -e .env -e .env.prod parcel build src/public/index.html",
     "lint": "node_modules/.bin/eslint --ext .jsx --ext .js src"
   },
