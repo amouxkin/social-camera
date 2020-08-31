@@ -32,10 +32,15 @@ const authenticate = async (auth: "login" | "signup", body) =>
       });
       return true;
     })
-    .catch((e) => {
-      console.log(e);
-      return false;
-    });
+
+const unauthorised = async (response: Response): Promise<Response> => {
+  if (response.status !== 200) {
+    localStorage.clear();
+    refreshBrowser();
+    throw new Error(response.status === 403 ? "Unauthorised" : "Wrong Credentials");
+  }
+  return response;
+};
 
 export const login = async (body): Promise<boolean> =>
   authenticate("login", body);
@@ -45,14 +50,6 @@ export const register = async (body): Promise<boolean> =>
 
 export const logout = () => localStorage.clear();
 
-const unauthorised = async (response: Response): Promise<Response> => {
-  if (response.status === 403) {
-    localStorage.clear();
-    refreshBrowser();
-    throw new Error("Unauthorised");
-  }
-  return response;
-};
 
 export const getUnsignedUrl = async (): Promise<any> => {
   fetch(urlCreator("get-presigned-url"), {

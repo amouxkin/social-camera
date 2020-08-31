@@ -19,14 +19,16 @@ const LoginForm = () => {
   const [requiredCheck, setRequired] = useState(false);
   const state = useContext(AuthenticationContext);
   const { addToast } = useToasts();
-  const loggedInMessage =  useDelayedAlert(`Welcome ${localStorage.getItem("name")}`);
+  const loggedInMessage = useDelayedAlert();
 
   const submit = (e: React.FormEvent) => {
     if (!requiredCheck) setRequired(true);
 
     e.preventDefault();
+
     state.setIsLoading(true);
     const data = new FormData(e.target as HTMLFormElement);
+
     login(
       JSON.stringify({
         email: data.get("email"),
@@ -35,7 +37,7 @@ const LoginForm = () => {
     )
       .then((loggedIn) => {
         if (!loggedIn) throw new Error("Failed to Login");
-        loggedInMessage();
+        loggedInMessage(`Welcome ${localStorage.getItem("name")}`);
       })
       .catch((e) =>
         addToast(`Login Failed: ${e}`, {

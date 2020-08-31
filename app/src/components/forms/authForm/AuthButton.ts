@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef } from "react";
 import styled from "styled-components";
-import { BaseContainer, BaseDivProps } from "../../pages/authentication/styles";
+import { BaseContainer, BaseDivProps } from "../../../pages/authentication/styles";
 
 interface AuthButtonProps extends ComponentPropsWithoutRef<"button"> {
   selected: boolean;

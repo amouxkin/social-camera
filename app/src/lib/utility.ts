@@ -5,13 +5,12 @@ export const refreshBrowser = () => {
 };
 
 export const useDelayedAlert = (
-  message: string,
   appearance: string = "success",
   timeout: number = 500
-): (() => void) => {
+): ((message: string) => void) => {
   const { addToast } = useToasts();
 
-  return () => {
+  return (message: string) => {
     setTimeout(
       () =>
         addToast(message, {

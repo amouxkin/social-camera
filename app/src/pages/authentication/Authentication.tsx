@@ -14,7 +14,7 @@ import {
 import {
   AuthButtonContainer,
   AuthButton,
-} from "../../components/forms/AuthButton";
+} from "../../components/forms/authForm/AuthButton";
 import logo from "../../assets/img/app-icon.png";
 import LoginForm from "../../components/forms/authForm/LoginForm";
 import AuthenticationContext from "../../contexts/AuthenticationContext";
