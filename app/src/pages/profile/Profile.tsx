@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { useToasts } from "react-toast-notifications";
 import { Layout } from "../../components/layout";
 import { Button, Flex } from "../../components/styles";
-import { Camera, Wrapper } from "./style";
+import { Camera, Wrapper, Image } from "./style";
 import { WebcamComponent } from "../../components/webcam/Webcam";
 import { ProfileContext } from "../../contexts/ProfileContext";
 import { getUnsignedUrl } from "../../lib/authentication";
@@ -49,9 +49,9 @@ const Profile = () => {
             {!state.image ? (
               <Camera>uploaded snapshot shows here</Camera>
             ) : (
-              <img src={state.image}  alt={"image"}/>
+              <Image src={state.image}  alt={"image"}/>
             )}
-            <Button className="green">Clear</Button>
+            <Button className="green" onClick={() => state.setImage(null)}>Clear</Button>
           </Wrapper>
         </ProfileContext.Provider>
       </Flex>
