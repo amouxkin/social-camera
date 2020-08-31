@@ -20,7 +20,7 @@ const LoginForm = () => {
   const [requiredCheck, setRequired] = useState(false);
   const state = useContext(AuthenticationContext);
   const { addToast } = useToasts();
-  const loggedInMessage = useDelayedAlert();
+  const delayedAlert = useDelayedAlert();
   const userName = useContext(UserContext);
 
   const submit = (e: React.FormEvent) => {
@@ -39,7 +39,7 @@ const LoginForm = () => {
     )
       .then(async (loggedIn) => {
         if (!loggedIn) throw new Error("Failed to Login");
-        loggedInMessage(`Welcome ${localStorage.getItem("name")}`);
+        delayedAlert(`Welcome ${localStorage.getItem("name")}`);
         // To execute the function after component is loaded.
         setTimeout(() => userName.setName(localStorage.getItem("name")), 0);
       })

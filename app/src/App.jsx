@@ -9,7 +9,7 @@ import { Authentication } from "./pages/authentication/Authentication";
 import { PrivateRoute } from "./components/privateRoute/PrivateRoute";
 import { UserContext } from "./contexts/UserContext";
 
-const Profile = React.lazy(() => import("./pages/profile/Profile.jsx"));
+const Profile = React.lazy(() => import("./pages/profile/Profile.tsx"));
 const NotFound = React.lazy(() => import("./pages/404"));
 
 const App = () => {

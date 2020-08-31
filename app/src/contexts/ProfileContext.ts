@@ -2,7 +2,7 @@ import { createContext, Ref, RefObject } from "react";
 import Webcam from "react-webcam";
 
 export interface ProfileContextProps {
-  webcamRef: Ref<Webcam>;
+  webcamRef: (string & RefObject<HTMLVideoElement>) ;
   containerRef: RefObject<HTMLDivElement>;
   width: number;
   height: number;
