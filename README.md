@@ -7,8 +7,15 @@
 * Postgresql is used as the db to store user credentilas.
 * Sequleize is the ORM.
 * JWT for authentication (Simple, 30 mins).
+* SSL for all services.
+* Converted backend to typescript.
+* Frontend partially typescript (all my codes).
 
-# Environment
+
+# Hosted
+* Frontend  :   https://unbird.abendrot.net/auth 
+* Backend   :   https://unbirdserver.abendrot.net
+* S3        :   https://unbirds3.abendrot.net
 
 
 # Minio is used for S3 storage.
