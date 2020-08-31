@@ -1,4 +1,4 @@
-import { refreshBrowser } from "./utility";
+import { base64ToJpeg, refreshBrowser } from "./utility";
 import { useEffect } from "react";
 
 interface RegisterResponse {
@@ -60,16 +60,14 @@ export const getUnsignedUrl = async (): Promise<any> => {
 };
 
 export const uploadImage = async (image: string, url) => {
-  fetch(url, {
+  const data = new FormData()
+  const  blob = base64ToJpeg(image);
+
+  data.append('file', blob)
+  console.log(url)
+
+  return fetch(url, {
     method: "PUT",
-    body: JSON.stringify({
-      file: image,
-    }),
-  })
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    body: blob
+  });
 };

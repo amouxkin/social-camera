@@ -26,9 +26,9 @@ const Profile = () => {
     setLoading(true);
 
     getUnsignedUrl()
-      .then((unsignedUrl) => {
-        return uploadImage(image, unsignedUrl)
-          .then((r) => {
+      .then(async (unsignedUrl) => {
+        uploadImage(image, unsignedUrl)
+          .then(async (r) => {
             setUploadUrl(unsignedUrl);
 
             addToast("Image Uploaded", {

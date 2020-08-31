@@ -22,6 +22,13 @@ export const useDelayedAlert = (
   };
 };
 
-export const base64ToJpeg = (base64Image: string) => {
+export const base64ToJpeg = (dataURI, contentType = "image/jpeg"): Blob => {
+  const byteString = atob(dataURI.split(",")[1]);
+  const arrayBuffer = new ArrayBuffer(byteString.length);
+  const uint8Array = new Uint8Array(arrayBuffer);
 
-}
+  for (let i = 0; i < byteString.length; i++) {
+    uint8Array[i] = byteString.charCodeAt(i);
+  }
+  return new Blob([arrayBuffer], { type: contentType });
+};
