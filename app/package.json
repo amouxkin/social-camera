@@ -8,8 +8,8 @@
   "license": "ISC",
   "scripts": {
     "clean": "rm -rf  dist",
-    "start": "dotenv -e .env -e .env.prod -- parcel serve src/public/index.html",
-    "build-prod": "dotenv -e .env -e .env.prod parcel build src/public/index.html",
+    "start": "dotenv -e .env.prod -e .env -- parcel serve src/public/index.html",
+    "build-prod": "dotenv -e .env.prod -e .env parcel build src/public/index.html",
     "lint": "node_modules/.bin/eslint --ext .jsx --ext .js src"
   },
   "dependencies": {

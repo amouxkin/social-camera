@@ -1,6 +1,50 @@
 ## SOCIAL Camera
  Simple photo taking app
 
+# Tech Stack
+* Used Minio as the S3 storage.
+* AWS sdk used -- server.
+* Postgresql is used as the db to store user credentilas.
+* Sequleize is the ORM.
+* JWT for authentication (Simple, 30 mins).
+
+# Environment
+
+
+# Minio is used for S3 storage.
+
+## Development Minio
+
+```
+docker run -d -p 8000:9000 \
+  -e "MINIO_ACCESS_KEY=minio" \
+  -e "MINIO_SECRET_KEY=secretkey" \
+  minio/minio server /data
+```
+> * Create a bucket named 'bucket'.
+> * Change policy to '*' with read and write permission.
+
+## Production
+```http://192.155.85.26:8000```
+> Access key : minio 
+> Secret key : secretkey 
+
+# Postgresql is the Database Engine
+## Development Database
+```
+ docker run -e POSTGRES_PASSWORD=password -p 5432:5432 -d postgres
+```
+
+
+# Testing
+> Jest is used as the testing library.
+
+## Naming Scheme
+Opted to use the scheme: 
+`Expected Behavior -- When Test Case`
+
+
+
 ## RUN
  - cd into app folder and  run `yarn start`
  - cd into index folder and  run `yarn start`
