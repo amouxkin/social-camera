@@ -21,3 +21,7 @@ export const useDelayedAlert = (
     );
   };
 };
+
+export const base64ToJpeg = (base64Image: string) => {
+
+}

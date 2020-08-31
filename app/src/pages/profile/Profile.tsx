@@ -21,34 +21,37 @@ const Profile = () => {
   const { addToast } = useToasts();
 
   const capture = () => {
-    state.setImage(state.webcamRef.current.getScreenshot());
+    const image = (state.webcamRef.current.getScreenshot());
 
-    if (!uploadUrl)
-      getUnsignedUrl()
-        .then((unsignedUrl) => !uploadUrl && setUploadUrl(unsignedUrl))
-        .catch((error) => {
-          console.log(error);
-          addToast(error, {
-            appearance: "error",
-            autoDismiss: true,
-          });
-        });
-  };
-
-  const upload = () => {
     setLoading(true);
 
+    getUnsignedUrl()
+      .then((unsignedUrl) => {
+        return uploadImage(image, unsignedUrl)
+          .then((r) => {
+            setUploadUrl(unsignedUrl);
 
-    // Wait until url is fetched.
+            addToast("Image Uploaded", {
+              appearance: "success",
+              autoDismiss: true,
+            });
+          })
+          .catch((e) => console.log(e));
+      })
+      .catch((error) => {
+        console.log(error);
 
-    uploadImage(state.image, uploadUrl)
-      .then((r) => console.log(r))
-      .catch((e) => console.log(e));
+        addToast(error, {
+          appearance: "error",
+          autoDismiss: true,
+        });
+      })
+      .finally(() => setLoading(false));
   };
 
   return (
     <Layout title="Take a snapshot">
-      <Loading>
+      <Loading active={isLoading} spinner >
         <Flex>
           <ProfileContext.Provider value={state}>
             <Wrapper>
@@ -63,7 +66,7 @@ const Profile = () => {
               {!state.image ? (
                 <Camera>uploaded snapshot shows here</Camera>
               ) : (
-                <Image src={state.image} alt={"image"} />
+                <Image src={uploadUrl} alt={"image"} />
               )}
               <Button className="green" onClick={() => state.setImage(null)}>
                 Clear
@@ -71,7 +74,6 @@ const Profile = () => {
             </Wrapper>
           </ProfileContext.Provider>
         </Flex>
-        <UploadButton onClick={upload}>Upload</UploadButton>
       </Loading>
     </Layout>
   );
