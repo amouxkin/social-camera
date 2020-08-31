@@ -23,21 +23,22 @@ const authenticate = async (auth: "login" | "signup", body) =>
     method: "POST",
     headers: header(),
     body: body,
-  })
-    .then(async (response) => {
-      response.json().then((register: RegisterResponse) => {
-        for (const [key, value] of Object.entries(register)) {
-          localStorage.setItem(key, value);
-        }
-      });
-      return true;
-    })
+  }).then(async (response) => {
+    response.json().then((register: RegisterResponse) => {
+      for (const [key, value] of Object.entries(register)) {
+        localStorage.setItem(key, value);
+      }
+    });
+    return true;
+  });
 
 const unauthorised = async (response: Response): Promise<Response> => {
   if (response.status !== 200) {
     localStorage.clear();
     refreshBrowser();
-    throw new Error(response.status === 403 ? "Unauthorised" : "Wrong Credentials");
+    throw new Error(
+      response.status === 403 ? "Unauthorised" : "Wrong Credentials"
+    );
   }
   return response;
 };
@@ -50,16 +51,12 @@ export const register = async (body): Promise<boolean> =>
 
 export const logout = () => localStorage.clear();
 
-
 export const getUnsignedUrl = async (): Promise<any> => {
-  fetch(urlCreator("get-presigned-url"), {
+  return await fetch(urlCreator("get-presigned-url"), {
     headers: header(),
-  }).then(unauthorised)
-    .then((response) => {
-      response.json().then((parsed) => {
-        return parsed.url;
-      });
-    })
+  })
+    .then(unauthorised)
+    .then(async (response) => response.json().then((parsed) => parsed.url));
 };
 
 export const uploadImage = async (image: string, url) => {
