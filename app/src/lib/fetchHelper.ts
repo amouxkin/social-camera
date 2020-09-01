@@ -1,5 +1,4 @@
 import { base64ToJpeg, refreshBrowser } from "./utility";
-import { useEffect } from "react";
 
 interface RegisterResponse {
   id: number;
