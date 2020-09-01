@@ -40,7 +40,6 @@ export const userAttributes: ModelAttributes = {
     type: Sequelize.STRING(128),
     allowNull: false,
     validate: {
-      isAlphanumeric: true,
       len: [3, 128]
     }
   },
